@@ -1,0 +1,43 @@
+{
+  "name": "family-tree-frontend",
+  "version": "1.0.0",
+  "description": "Family Tree Management Application - Frontend",
+  "productName": "Family Tree",
+  "author": "Family Tree Team",
+  "private": true,
+  "scripts": {
+    "build": "quasar build",
+    "build:pwa": "quasar build -m pwa",
+    "build:spa": "quasar build -m spa",
+    "clean": "quasar clean",
+    "dev": "quasar dev",
+    "dev:pwa": "quasar dev -m pwa",
+    "lint": "vite-plugin-checker + ESLint + vue-tsc",
+    "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"See package.json => scripts for available testing scripts.\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.12",
+    "@vueuse/core": "^11.2.0",
+    "axios": "^1.7.9",
+    "d3": "^7.9.0",
+    "pinia": "^2.3.0",
+    "quasar": "^2.17.0",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "^2.0.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "vite-plugin-checker": "^0.8.0"
+  },
+  "engines": {
+    "node": "^20 || ^18 || ^16",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+} 

@@ -1,0 +1,19 @@
+[build]
+  base = "quasar-project/"
+  publish = "quasar-project/dist/spa"
+  command = "npm ci && npm run build:spa"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--prefix=/opt/buildhome/cache/node_global"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  VUE_APP_API_URL = "https://your-render-app.onrender.com/api"
+
+[context.deploy-preview.environment]
+  VUE_APP_API_URL = "https://your-render-app.onrender.com/api" 
