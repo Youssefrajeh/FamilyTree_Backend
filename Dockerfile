@@ -11,8 +11,17 @@ WORKDIR /src
 COPY ["backend/FamilyTreeAPI/FamilyTreeAPI/FamilyTreeAPI.csproj", "backend/FamilyTreeAPI/FamilyTreeAPI/"]
 RUN dotnet restore "backend/FamilyTreeAPI/FamilyTreeAPI/FamilyTreeAPI.csproj"
 
-# Copy the rest of the source code
-COPY . .
+# Copy only the backend source code
+COPY backend/ ./backend/
+COPY Controllers/ ./Controllers/
+COPY Data/ ./Data/
+COPY DTOs/ ./DTOs/
+COPY Models/ ./Models/
+COPY Services/ ./Services/
+COPY Program.cs ./
+COPY appsettings*.json ./
+COPY FamilyTree.sln ./
+
 WORKDIR "/src/backend/FamilyTreeAPI/FamilyTreeAPI"
 
 # Build the application
