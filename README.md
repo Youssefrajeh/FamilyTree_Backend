@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FamilyTree
 # Family Tree Web Application
 
@@ -104,3 +105,45 @@ FamilyTree/
 - Touch-friendly tree navigation
 - Adaptive layouts for all screen sizes
 - Progressive Web App capabilities 
+=======
+# Quasar App (quasar-project)
+
+A Quasar Project
+
+## Install the dependencies
+```bash
+yarn
+# or
+npm install
+```
+
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
+quasar dev
+```
+
+
+### Lint the files
+```bash
+yarn lint
+# or
+npm run lint
+```
+
+
+### Format the files
+```bash
+yarn format
+# or
+npm run format
+```
+
+
+### Build the app for production
+```bash
+quasar build
+```
+
+### Customize the configuration
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+>>>>>>> f6914460a6c2d7932b0f3247ea007e26c1232273
