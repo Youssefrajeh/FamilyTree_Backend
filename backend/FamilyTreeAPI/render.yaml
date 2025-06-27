@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: family-tree-api
+    env: dotnet
+    plan: free
+    buildCommand: dotnet build
+    startCommand: dotnet run --urls http://0.0.0.0:$PORT
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:$PORT
+      - key: DATABASE_URL
+        fromDatabase:
+          name: family-tree-db
+          property: connectionString
+      - key: JWT__KEY
+        generateValue: true
+        pattern: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        length: 32
+      - key: JWT__ISSUER
+        value: FamilyTreeAPI
+      - key: JWT__AUDIENCE
+        value: FamilyTreeApp
+
+databases:
+  - name: family-tree-db
+    databaseName: familytree_db
+    user: familytree_user
+    plan: free 

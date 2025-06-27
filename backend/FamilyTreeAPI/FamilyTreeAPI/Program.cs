@@ -15,6 +15,14 @@ builder.Services.AddControllers();
 
 // Add Entity Framework - try PostgreSQL first, fallback to In-Memory for testing
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+// Use DATABASE_URL from Render if available, otherwise use connection string from config
+if (!string.IsNullOrEmpty(databaseUrl))
+{
+    connectionString = databaseUrl;
+}
+
 var useInMemory = builder.Configuration.GetValue<bool>("UseInMemoryDatabase", false);
 
 if (useInMemory || string.IsNullOrEmpty(connectionString))
@@ -98,6 +106,18 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader()
         .AllowCredentials();
     });
+
+    options.AddPolicy("AllowProduction", policy =>
+    {
+        policy.WithOrigins(
+            "https://your-frontend-domain.netlify.app",
+            "https://family-tree-frontend.netlify.app",
+            "https://*.netlify.app"
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
 });
 
 // Add Swagger/OpenAPI
@@ -149,9 +169,26 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
     });
 }
+else
+{
+    // Enable Swagger in production for API documentation
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Family Tree API v1");
+        c.RoutePrefix = "api-docs"; // Set Swagger UI at /api-docs
+    });
+}
 
 // Enable CORS
-app.UseCors("AllowLocalhost");
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("AllowLocalhost");
+}
+else
+{
+    app.UseCors("AllowProduction");
+}
 
 // Security headers
 app.Use(async (context, next) =>
