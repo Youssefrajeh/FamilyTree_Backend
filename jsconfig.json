@@ -1,3 +1,7 @@
 {
-  "extends": "./.quasar/tsconfig.json"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "exclude": ["node_modules", "dist"]
 }
