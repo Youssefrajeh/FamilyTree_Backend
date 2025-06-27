@@ -1,0 +1,27 @@
+services:
+  # Backend API Service
+  - type: web
+    name: familytree-api
+    env: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:8080
+      - key: PORT
+        value: 8080
+
+  # Frontend Static Site
+  - type: web
+    name: familytree-frontend
+    env: static
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build:spa
+    staticPublishPath: ./dist/spa
+    envVars:
+      - key: VITE_API_URL
+        value: https://familytree-api.onrender.com 
